@@ -1,5 +1,5 @@
 **Estudiante:** [Luis Ossio]
-**Curso:** [Docker & Kubernetes - i-Quattro](https://www.i-quattro.com/product-page/dok-kub-001)
+**Curso:** ["Tareas - Curso Docker & Kubernetes"]
 
 ## Sobre este repositorio
 
