@@ -46,16 +46,16 @@ Successfully tagged tasks-api:1.0
 
 ## Testing
 
-![Docker Images](screenshots/docker-images.png)
+![Docker Images](screenshots/docker_images.png)
 ![Container Running](screenshots/docker-ps.png)
 ![API Response](screenshots/curl-response.png)
 
 ## Docker Hub
 
-**URL:** https://hub.docker.com/r/miusuario/tasks-api
-
-![Docker Hub](screenshots/dockerhub.png)
-
+**URL:** https://hub.docker.com/r/Lossio1986/tasks-api
+https://hub.docker.com/repository/docker/lossio86/clases/tags
+![Docker Hub](screenshots/docker_hub.png)
+Da error al subir
 ## Optimizaciones
 
 - Multi-stage build: redujo de 320MB a 145MB
