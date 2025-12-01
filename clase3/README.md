@@ -20,4 +20,5 @@ Esta es una aplicación web simple que utiliza un servidor Nginx y una base de d
 
 1. Clonar:
    ```bash
-   git clone 
+   git clone https://github.com/lossio86/curso-docker-kubernetes-tareas/tree/main/clase3.git
+   cd clase3
