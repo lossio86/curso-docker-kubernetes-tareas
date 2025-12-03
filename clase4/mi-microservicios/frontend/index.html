@@ -1,1 +1,55 @@
-....
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Microservicios - Frontend</title>
+  <style>
+    body{font-family: Arial; max-width:900px;margin:30px auto}
+    input, textarea{width:100%;}
+    .post{border:1px solid #ddd;padding:10px;margin:10px 0}
+  </style>
+</head>
+<body>
+  <h1>Blog - Frontend</h1>
+
+  <section id="create">
+    <h2>Crear Post</h2>
+    <input id="title" placeholder="Título" />
+    <textarea id="content" rows="4" placeholder="Contenido"></textarea>
+    <button onclick="createPost()">Crear</button>
+  </section>
+
+  <section>
+    <h2>Posts</h2>
+    <button onclick="loadPosts()">Refrescar lista</button>
+    <div id="posts"></div>
+  </section>
+
+  <script>
+    const API = '/api';
+
+    async function loadPosts(){
+      const res = await fetch(API + '/posts');
+      const json = await res.json();
+      const el = document.getElementById('posts');
+      el.innerHTML = '<p>Fuente: ' + json.source + '</p>' + json.data.map(p => `\n        <div class="post">\n          <h3>${p.title}</h3>\n          <p>${p.content}</p>\n          <small>${new Date(p.createdAt).toLocaleString()}</small>\n        </div>`).join('\n');
+    }
+
+    async function createPost(){
+      const title = document.getElementById('title').value;
+      const content = document.getElementById('content').value;
+      await fetch(API + '/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, content })
+      });
+      document.getElementById('title').value = '';
+      document.getElementById('content').value = '';
+      loadPosts();
+    }
+
+    // Auto-load
+    loadPosts();
+  </script>
+</body>
+</html>
