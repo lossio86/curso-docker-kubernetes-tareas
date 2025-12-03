@@ -1,1 +1,94 @@
-......
+version: '3.8'
+
+networks:
+  micro_net:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  redis_data:
+  frontend_data:
+
+services:
+  gateway:
+    image: nginx:stable-alpine
+    container_name: gateway
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - '8080:80'
+    networks:
+      - micro_net
+    depends_on:
+      - frontend
+      - service1
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost/gateway/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    volumes:
+      - frontend_data:/usr/share/nginx/html:ro
+    networks:
+      - micro_net
+    depends_on:
+      - service1
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:80/" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  service1:
+    build: ./service1
+    container_name: service_posts
+    environment:
+      - MONGO_URI=mongodb://db:27017/blogdb
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - '5000:5000'
+    networks:
+      - micro_net
+    depends_on:
+      - db
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - '6379:6379'
+    networks:
+      - micro_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  db:
+    image: mongo:6.0
+    container_name: mongo_db
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - micro_net
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
