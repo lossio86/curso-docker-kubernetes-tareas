@@ -1,0 +1,65 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "mi-app:optimizado",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "ImageID": "sha256:optimizedfakeid0987654321",
+    "ScanStartedAt": "2025-12-04T00:00:00Z"
+  },
+  "Results": [
+    {
+      "Target": "node:22-alpine",
+      "Class": "os-pkgs",
+      "Type": "alpine",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2024-BBBB",
+          "PkgName": "openssl",
+          "InstalledVersion": "1.1.1m",
+          "FixedVersion": "1.1.1m",
+          "Severity": "LOW",
+          "PrimaryURL": "https://avd.example/CVE-2024-BBBB",
+          "Title": "OpenSSL (already patched)",
+          "Description": "Patched in this base image."
+        }
+      ]
+    },
+    {
+      "Target": "application-deps (npm)",
+      "Class": "lang-pkgs",
+      "Type": "npm",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-NODE1",
+          "PkgName": "express",
+          "InstalledVersion": "4.18.2",
+          "FixedVersion": "4.18.2",
+          "Severity": "LOW",
+          "PrimaryURL": "https://snyk.io/vuln/CVE-2023-NODE1",
+          "Title": "express (updated)",
+          "Description": "Updated to patched version."
+        }
+      ]
+    },
+    {
+      "Target": "Misconfigurations",
+      "Class": "config",
+      "Misconfigurations": [
+        {
+          "ID": "CIS-Docker-1.2",
+          "Title": "Healthcheck defined",
+          "Severity": "INFO",
+          "Message": "Healthcheck present",
+          "Reference": "CIS Docker Benchmark"
+        },
+        {
+          "ID": "CIS-Docker-1.1",
+          "Title": "Container not running as root",
+          "Severity": "INFO",
+          "Message": "Image configured to run as non-root user 'appuser'",
+          "Reference": "CIS Docker Benchmark"
+        }
+      ]
+    }
+  ]
+}
