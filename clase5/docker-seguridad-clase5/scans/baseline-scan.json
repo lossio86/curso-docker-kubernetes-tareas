@@ -1,0 +1,112 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "mi-app:baseline",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "ImageID": "sha256:baselinefakeid1234567890",
+    "ScanStartedAt": "2025-12-04T00:00:00Z"
+  },
+  "Results": [
+    {
+      "Target": "node:22 (alpine?)",
+      "Class": "os-pkgs",
+      "Type": "alpine",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2024-AAAA",
+          "PkgName": "musl",
+          "InstalledVersion": "1.2.3-r0",
+          "FixedVersion": "1.2.4-r0",
+          "Severity": "CRITICAL",
+          "PrimaryURL": "https://avd.example/CVE-2024-AAAA",
+          "Title": "Buffer overflow in musl",
+          "Description": "Buffer overflow in musl libc allows remote code execution under some conditions."
+        },
+        {
+          "VulnerabilityID": "CVE-2024-BBBB",
+          "PkgName": "openssl",
+          "InstalledVersion": "1.1.1k",
+          "FixedVersion": "1.1.1m",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.example/CVE-2024-BBBB",
+          "Title": "TLS vulnerability in OpenSSL",
+          "Description": "OpenSSL vulnerability affecting TLS handshake."
+        },
+        {
+          "VulnerabilityID": "CVE-2023-CCCC",
+          "PkgName": "glibc",
+          "InstalledVersion": "2.31",
+          "FixedVersion": "2.34",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.example/CVE-2023-CCCC",
+          "Title": "glibc issue",
+          "Description": "Heap overflow in glibc."
+        },
+        {
+          "VulnerabilityID": "CVE-2022-DDDD",
+          "PkgName": "busybox",
+          "InstalledVersion": "1.33.1",
+          "FixedVersion": "1.34.0",
+          "Severity": "MEDIUM",
+          "PrimaryURL": "https://avd.example/CVE-2022-DDDD",
+          "Title": "BusyBox vulnerability",
+          "Description": "Minor issue in busybox."
+        }
+      ]
+    },
+    {
+      "Target": "application-deps (npm)",
+      "Class": "lang-pkgs",
+      "Type": "npm",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-NODE1",
+          "PkgName": "express",
+          "InstalledVersion": "4.17.1",
+          "FixedVersion": "4.18.2",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://snyk.io/vuln/CVE-2023-NODE1",
+          "Title": "Prototype Pollution in express",
+          "Description": "Prototype pollution in express versions."
+        },
+        {
+          "VulnerabilityID": "CVE-2023-NODE2",
+          "PkgName": "lodash",
+          "InstalledVersion": "4.17.19",
+          "FixedVersion": "4.17.21",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://snyk.io/vuln/CVE-2023-NODE2",
+          "Title": "lodash prototype pollution",
+          "Description": "Vulnerability in lodash."
+        }
+      ]
+    },
+    {
+      "Target": "Misconfigurations",
+      "Class": "config",
+      "Misconfigurations": [
+        {
+          "ID": "CIS-Docker-1.1",
+          "Title": "Container running as root",
+          "Severity": "HIGH",
+          "Message": "Container runs as root user",
+          "Reference": "CIS Docker Benchmark"
+        },
+        {
+          "ID": "CIS-Docker-1.2",
+          "Title": "No healthcheck defined",
+          "Severity": "MEDIUM",
+          "Message": "Healthcheck not found in image",
+          "Reference": "CIS Docker Benchmark"
+        },
+        {
+          "ID": "CIS-Docker-1.3",
+          "Title": "Writable filesystem",
+          "Severity": "MEDIUM",
+          "Message": "Filesystem not read-only",
+          "Reference": "CIS Docker Benchmark"
+        }
+      ]
+    }
+  ]
+}
